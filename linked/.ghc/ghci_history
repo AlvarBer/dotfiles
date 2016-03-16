@@ -1,0 +1,100 @@
+:l Lab1/src.hs
+:l Lab1/src.hs
+:l Lab1/src.hs
+:info (/=)
+:info (!=)
+:l Lab1/src.hs
+5 != 4
+:info (/=)
+notEqual' 1 5 4
+notEqual' 1 5 5
+notEqual' 1 5 1
+notEqual' 1 1 1
+notEqual' 3 1 1
+notEqual' 3 1 2
+notEqual' 3 1 3
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+:info (==)
+:info (&&)
+:info ($)
+:info (&&)
+:l Lab1/src.hs 
+:info (=)
+:info (/=)
+:info (&&)
+:info (==)
+:info (==)
+:info (&&)
+:info (/=)
+threeEqual' 3 3 3
+threeEqual' 3 2 3
+:l Lab1/src.hs 
+threeEqual' 3 2 3
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+:info &&
+:info &&
+:info ==
+notEqual 1 1 1
+notEqual 3 1 1
+notEqual 3 1 2
+notEqual 3 1 3
+notEqual 3 3 1
+:l Lab1/src.hs 
+notEqual 3 3 1
+treeEqual 3 2 3
+treeEqual 3 3 2
+treeEqual 3 3 3
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+i (-2) 9
+i (-)2 9
+i 2 9
+i 3 2
+i 2 2
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+h 1 2 3
+h 1 2 3
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+h 74 52348 5
+h 74 52348u 5
+h 74 2 5
+h 1 2 5
+h 1 2 3
+:l Lab1/src.hs 
+g 3
+:l Lab1/src.hs 
+g 3
+:l Lab1/src.hs 
+g 3
+:l Lab1/src.hs 
+g 3
+g 3
+:l Lab1/src.hs 
+g 3
+g 3
+g 3
+:l Lab1/src.hs 
+g 3
+:l Lab1/src.hs 
+:l Lab1/src.hs 
+f 7 4
+:l Lab1/src.hs 
+dateTime (600 * 24 * 60 * 60)
+dateTime (1.5 * 365 * 24 * 60 * 60)
+dateTime (2 * 365 * 24 * 60 * 60)
+dateTime (365 * 24 * 60 * 60)
+:l Lab1/src.hs 
+dateTime (365 * 24 * 60 * 60)
+dateTime (60 * 60 * 24 * 365)
+dateTime (2 * 60 * 60 * 24 * 365)
+dateTime (2 * 60 * 60 * 24 * 365)
+:l Lab1/src.hs 
+dateTime (2 * 60 * 60 * 24 * 365)
+dateTime (1 * 60 * 60 * 24 * 365)
+dateTime (60 * 60 * 24 * 365)
