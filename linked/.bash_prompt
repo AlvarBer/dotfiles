@@ -1,0 +1,14 @@
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+if [ "$USER" != "root" ]; then
+	if [ "$COLOUR" = "yes" ]; then
+		PS1="${debian_chroot:+($debian_chroot)}${ORANGE}\h:${AUBERGINE}\w ${NO_COLOUR}λ> "
+	else
+		PS1="${debian_chroot:+($debian_chroot)}\h:\w λ> "
+	fi
+else
+	PS1="${debian_chroot:+($debian_chroot)}\h:\w %> "
+fi

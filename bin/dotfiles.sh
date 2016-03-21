@@ -1,7 +1,8 @@
 #!/bin/env bash
 
 dotfiles() {
-	githuburl=https://AlvarBer@github.com/AlvarBer/tmpdotfiles.git
+	githuburl=https://AlvarBer@github.com/AlvarBer/dotfiles.git
+	sshurl=git@github.com:AlvarBer/dotfiles.git
 	cd ~
 	if [[ ! '$(type -P git)' ]] ; then
 		echo 'Installing git'
@@ -9,6 +10,7 @@ dotfiles() {
 	fi
 	if [[ ! -d dotfiles ]] ; then
 		git clone $githuburl dotfiles
+		#git remote set-url origin sshurl
 		cd dotfiles
 		mkdir backup
 	else
