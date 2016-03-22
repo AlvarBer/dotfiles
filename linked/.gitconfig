@@ -1,4 +1,4 @@
- [user]
+[user]
 	name = AlvarBer
 	email = alvaro.garcia95@hotmail.com
 [alias]
@@ -8,3 +8,4 @@
 	default = simple
 [core]
 	excludesfile = /home/mortadelegle/.gitignore_global
+	editor = vim

@@ -19,7 +19,7 @@ dotfiles() {
 		if [[ '$(git rev-parse @)' = '$(git rev-parse @{u})' ]] ; then
 			exit 0
 		fi
-		git pull origin master
+		git merge origin/master
 	fi
 	cd linked
 	for file in $(find . -maxdepth 1 -mindepth 1 -name *) ; do

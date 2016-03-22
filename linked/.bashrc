@@ -49,7 +49,13 @@ fi
 
 . ~/.bash_prompt
 
+# Byobu Prompt in case we are in byobu
+if [ -r /home/mortadelegle/.byobu/prompt ]; then
+    . /home/mortadelegle/.byobu/prompt
+fi
+
 ###############################################################################
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -62,9 +68,11 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+###############################################################################
+# Auto Completion
+
+# Enable programmable completion features (you don't need to enable this, if it
+# is already enabled in /etc/bash.bashrc and /etc/profile sources that file).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -73,13 +81,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -r /home/mortadelegle/.byobu/prompt ]; then
-    . /home/mortadelegle/.byobu/prompt # Byobu Prompt in case we are in byobu
-fi
-
-. ~/dotfiles/bin/dotfiles.sh
-
 # SSH auto-completion based on entries in known_hosts.
 if [[ -e ~/.ssh/known_hosts ]]; then
   complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
 fi
+
+###############################################################################
+
+. ~/dotfiles/bin/dotfiles.sh
