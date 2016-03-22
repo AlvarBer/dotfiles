@@ -47,7 +47,7 @@ if [ "$COLOUR" = "yes" ]; then
     export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 fi
 
-. ~/bash_prompt
+. ~/.bash_prompt
 
 ###############################################################################
 # Add an "alert" alias for long running commands.  Use like so:
