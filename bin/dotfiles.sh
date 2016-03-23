@@ -1,12 +1,18 @@
 #!/bin/env bash
 
+if [[ $1 = delete ]] ; then
+	echo "Removing"
+else
+	dotfiles
+fi
+
 # Here we syncronize / pull al files and link them
 dotfiles() {
 	githuburl=https://AlvarBer@github.com/AlvarBer/dotfiles.git
 	sshurl=git@github.com:AlvarBer/dotfiles.git
 	cd ~
-	if [[ ! '$(type -P git)' ]] ; then
-		echo 'Installing git'
+	if [[ ! "$(type -P git)" ]] ; then
+		echo "Installing git"
 		sudo apt-get install git
 	fi
 	if [[ ! -d dotfiles ]] ; then
@@ -24,13 +30,22 @@ dotfiles() {
 		git merge origin/master
 	fi
 	cd linked
-	for file in $(find . -maxdepth 1 -mindepth 1 -name *) ; do
-		echo File: $file
-		ln -s `pwd`/$file ~/$file
+	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f) ; do
+		ln -s `pwd`/$file ~/$file # File Soft Linking
 		if [[ $? -eq 1 ]] ; then
 			echo 'File already exists in ~, moving it to backup'
 			mv ~/$file ~/dotfiles/backup
 			ln -s `pwd`/$file ~/$file
+		fi
+	done
+	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d) ; do
+		ln -s `pwd`/$dir ~/$dir # Directories Soft Linking
+		if [[ $? -eq 1 ]] ; then
+			echo 'Dir already exists in ~, doing something'
+			mv ~/$dir ~/tmp
+			ln -s `pwd`/$dir ~/$dir
+			mv -n ~/tmp/* ~/$dir
+			rm -rf ~/tmp
 		fi
 	done
 }
