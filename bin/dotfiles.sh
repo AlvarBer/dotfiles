@@ -1,11 +1,5 @@
 #!/bin/env bash
 
-if [[ $1 = delete ]] ; then
-	echo "Removing"
-else
-	dotfiles
-fi
-
 # Here we syncronize / pull al files and link them
 dotfiles() {
 	githuburl=https://AlvarBer@github.com/AlvarBer/dotfiles.git
@@ -61,3 +55,5 @@ add_to_path() {
 	PATH=$TMP
 	PATH=~/dotfiles/bin:$PATH
 }
+
+dotfiles "$@"
