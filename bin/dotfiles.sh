@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # Here we syncronize / pull al files and link them
 dotfiles() {
@@ -54,6 +54,12 @@ add_to_path() {
 	TMP=${TMP#:}
 	PATH=$TMP
 	PATH=~/dotfiles/bin:$PATH
+}
+
+get_distro() {
+	if [[ -z DISTRIB_ID ]]; then
+		. /etc/lsb-release
+	fi
 }
 
 dotfiles "$@"
