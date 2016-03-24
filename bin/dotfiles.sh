@@ -25,19 +25,19 @@ dotfiles() {
 	fi
 	cd linked
 	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f) ; do
-		ln -s `pwd`/$file ~/$file # File Soft Linking
+		ln -s $(pwd)/$file ~/$file # File Soft Linking
 		if [[ $? -eq 1 ]] ; then
 			echo 'File already exists in ~, moving it to backup'
 			mv ~/$file ~/dotfiles/backup
-			ln -s `pwd`/$file ~/$file
+			ln -s $(pwd)/$file ~/$file
 		fi
 	done
 	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d) ; do
-		ln -s `pwd`/$dir ~/$dir # Directories Soft Linking
+		ln -s $(pwd)/$dir ~ # Directories Soft Linking
 		if [[ $? -eq 1 ]] ; then
 			echo 'Dir already exists in ~, doing something'
 			mv ~/$dir ~/tmp
-			ln -s `pwd`/$dir ~/$dir
+			ln -s $(pwd)/$dir ~/$dir
 			mv -n ~/tmp/* ~/$dir
 			rm -rf ~/tmp
 		fi
