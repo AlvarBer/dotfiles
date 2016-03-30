@@ -1,9 +1,9 @@
 # Usable colours by prompt/messages
-NO_COLOUR="\[\e[00m\]\]"
+NO_COLOUR="\[\e[00m\]"
 AUBERGINE="\[\e[38;5;5m\]"
 ORANGE="\[\e[38;5;172m\]"
 
-# Unussed colours
+# Unused colours
 #BLACK="\[\e[30m\]"
 #RED="\[\e[31m\]"
 #GREEN="\[\e[32m\]"
