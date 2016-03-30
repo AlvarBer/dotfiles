@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
-    # Shell is non-interactive.  Be done now!
-    return
+	# Shell is non-interactive.  Be done now!
+	return
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -35,23 +35,23 @@ shopt -s checkwinsize
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 if [ $(tput colors) -gt 1 ]; then
-    export COLOUR=yes # This doesn't cover all cases, but what does?
+	export COLOUR=yes # This doesn't cover all cases, but what does?
 else
-    export COLOUR=no
+	export COLOUR=no
 fi
 
 if [ "$COLOUR" = "yes" ]; then
-    . ~/.bash_colours # Source Bash Colours
-    
-    # colored GCC warnings and errors
-    export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+	. ~/.bash_colours # Source Bash Colours
+	
+	# colored GCC warnings and errors
+	export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 fi
 
 . ~/.bash_prompt
 
 # Byobu Prompt in case we are in byobu
 if [ -r /home/mortadelegle/.byobu/prompt ]; then
-    . /home/mortadelegle/.byobu/prompt
+	. /home/mortadelegle/.byobu/prompt
 fi
 
 ###############################################################################
@@ -64,8 +64,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [[ -f ~/.bash_aliases ]]; then
+	. ~/.bash_aliases
 fi
 
 ###############################################################################
@@ -74,14 +74,26 @@ fi
 # Enable programmable completion features (you don't need to enable this, if it
 # is already enabled in /etc/bash.bashrc and /etc/profile sources that file).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+	if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [[ -f /etc/bash_completion ]]; then
+		. /etc/bash_completion
+	fi
 fi
 
 # SSH auto-completion based on entries in known_hosts.
 if [[ -e ~/.ssh/known_hosts ]]; then
-  complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
+	complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
 fi
+
+###############################################################################
+# Dotfiles synchronization
+
+# Adds an entry to the PATH after trying to remove it, 
+# as seen on http://stackoverflow.com/a/2108540/142339
+TMP=:$PATH:
+TMP=${TMP/:~/dotfiles/bin:/:}
+TMP=${TMP%:}
+TMP=${TMP#:}
+PATH=$TMP
+PATH=~/dotfiles/bin:$PATH
