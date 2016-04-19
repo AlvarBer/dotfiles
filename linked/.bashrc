@@ -87,6 +87,11 @@ if [[ -e ~/.ssh/known_hosts ]]; then
 fi
 
 ###############################################################################
+# Autoenv Python virtualenv
+
+. ~/.autoenv/activate.sh
+
+###############################################################################
 # Dotfiles synchronization
 
 # Adds an entry to the PATH after trying to remove it, 
@@ -97,3 +102,4 @@ TMP=${TMP%:}
 TMP=${TMP#:}
 PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
+
