@@ -29,7 +29,7 @@ if [ -n "$TMUX" ] || [ "${TERMCAP#*screen}" != "${TERMCAP}" ]; then
 		byobu_prompt_symbol() {
 			if [ "$USER" = "root" ]; then
 				printf "%s" "#>";
-			elif [ "$BYOBU_DISTRO" = "Ubuntu" ]; then
+			else
 				case "$BYOBU_CHARMAP" in
 					"UTF-8")
 						# MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET (U+27EB, Pe): ⟫
@@ -38,8 +38,6 @@ if [ -n "$TMUX" ] || [ "${TERMCAP#*screen}" != "${TERMCAP}" ]; then
 						# Simple ASCII greater-than sign
 						printf "%s" ">";;
 				esac
-			else
-				printf "%s" "\$"
 			fi
 		}
 		case "$BYOBU_DISTRO" in
