@@ -5,7 +5,7 @@ fi
 
 if [ "$USER" != "root" ]; then
 	if [ "$COLOUR" = "yes" ]; then
-		PS1="${debian_chroot:+($debian_chroot)}${ORANGE}\h${NO_COLOUR}:${AUBERGINE}\w${NO_COLOUR}λ> "
+		PS1="${debian_chroot:+($debian_chroot)}${ORANGE}\h${NO_COLOUR}:${AUBERGINE}\w ${NO_COLOUR}λ> "
 	else
 		PS1="${debian_chroot:+($debian_chroot)}\h:\w λ> "
 	fi

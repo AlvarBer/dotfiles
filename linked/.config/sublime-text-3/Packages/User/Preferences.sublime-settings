@@ -1,7 +1,6 @@
-// Settings in here override those in "Default/Preferences.sublime-settings",
-// and are overridden in turn by file type specific settings.
 {
-	"indent_to_bracket": true,
-    "ensure_newline_at_eof_on_save": true,
-    "hot_exit": false,
+	"ensure_newline_at_eof_on_save": true,
+	"font_size": 10,
+	"hot_exit": false,
+	"indent_to_bracket": true
 }
