@@ -2,5 +2,10 @@
 	"ensure_newline_at_eof_on_save": true,
 	"font_size": 10,
 	"hot_exit": false,
+	"ignored_packages":
+	[
+		"Package Control",
+		"Vintage"
+	],
 	"indent_to_bracket": true
 }
