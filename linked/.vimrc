@@ -1,0 +1,3 @@
+colorscheme molokai
+
+syntax enable

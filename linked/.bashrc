@@ -103,3 +103,4 @@ TMP=${TMP#:}
 PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
 
+export JAVA_HOME=/usr/bin/java
