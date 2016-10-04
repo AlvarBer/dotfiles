@@ -2,9 +2,9 @@ dotfiles
 ========
 A minimal dotfiles system inspired by [cowboy dotfiles].
 
-Mainly done for learning purposes, it might kill your dotfiles.
+Mainly done for learning purposes, backup everything you hold dear.
 
-It should work on most mayor Linux distros.
+Only works in some select Linux distros (Mainly those with apt-get Arch and Apricity).
 
 backup folder
 -------------
@@ -26,6 +26,8 @@ the programs you want if the distro you are on is named as one of the scripts.
 linked folder
 -------------
 Everything here (files & folders) is (hard)linked into ~
+
+Don't put sensitive information here! It will appear in your github repository if you aren't carefull
 
 
 

@@ -47,7 +47,7 @@ synchronize() {
 			if [[ $1 == "-v" ]]; then
 				printf "File %s already exists in ~, backing up\n" "$file"
 			fi
-			mv -n ~/$file ~/dotfiles/backup
+			mv -f ~/$file ~/dotfiles/backup
 			ln -s $(pwd)/$file ~/$file
 		fi
 	done
@@ -57,9 +57,10 @@ synchronize() {
 			if [[ $1 == "-v" ]]; then
 				printf "Dir %s already in ~, preserving contents\n" "$dir"
 			fi
-			mv -p ~/$dir ~/tmp
+			mkdir ~/tmp
+			mv -v ~/$dir/* ~/tmp > /dev/null
 			ln -s $(pwd)/$dir ~/$dir
-			mv -n ~/tmp/* ~/$dir 
+			mv -v ~/tmp/* ~/$dir > /dev/null 2> /dev/null
 			rm -rf ~/tmp
 		fi
 	done
