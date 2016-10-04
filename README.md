@@ -1,10 +1,14 @@
-dotfiles
+dotfiles <img src="https://raw.githubusercontent.com/jglovier/dotfiles-logo/master/dotfiles-logo-icon.png" alt="dotfiles logo icon" width="30">
 ========
 A minimal dotfiles system inspired by [cowboy dotfiles].
 
 Mainly done for learning purposes, backup everything you hold dear.
 
 Only works in some select Linux distros (Mainly those with apt-get Arch and Apricity).
+
+One liner
+---------
+```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh -O - | sudo bash```
 
 backup folder
 -------------
