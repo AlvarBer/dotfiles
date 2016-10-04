@@ -10,6 +10,7 @@ synchronize() {
 	get_distro
 	get_install
 
+	cd ~
 	if [[ ! $(type -P git) ]]; then
 		if [[ $1 == "-v"  ]]; then
 			printf "Installing git\n"
@@ -21,10 +22,10 @@ synchronize() {
 		fi
 	fi
 	if [[ ! -d dotfiles ]]; then
-		git clone $remoteurl ~/dotfiles
+		git clone $remoteurl dotfiles
 		#git remote set-url origin sshurl
 		
-		cd ~/dotfiles
+		cd dotfiles
 		mkdir backup
 		if [[ $(whoami) == "root" ]]; then 
 			install/${DISTRIB_ID}.sh 2> /dev/null
