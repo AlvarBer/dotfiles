@@ -10,7 +10,6 @@ synchronize() {
 	get_distro
 	get_install
 
-	cd ~
 	if [[ ! $(type -P git) ]]; then
 		if [[ $1 == "-v"  ]]; then
 			printf "Installing git\n"
@@ -22,15 +21,18 @@ synchronize() {
 		fi
 	fi
 	if [[ ! -d dotfiles ]]; then
-		git clone $remoteurl dotfiles
+		git clone $remoteurl ~/dotfiles
 		#git remote set-url origin sshurl
-		cd dotfiles
+		
+		cd ~/dotfiles
 		mkdir backup
 		if [[ $(whoami) == "root" ]]; then 
 			install/${DISTRIB_ID}.sh 2> /dev/null
 		else
 			printf "You need sudo to install the programs\n" 
-		fi	
+		fi
+		delete_self=true
+		rm -- "$0"
 	else
 		cd dotfiles
 		git fetch origin master
@@ -42,28 +44,34 @@ synchronize() {
 	fi
 	cd linked
 	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f); do
-		ln -s $(pwd)/$file ~/$file 2> /dev/null # File Soft Linking
-		if [[ $? -eq 1 ]] ; then
+		if [[ -f ~/$file ]]; then
 			if [[ $1 == "-v" ]]; then
-				printf "File %s already exists in ~, backing up\n" "$file"
+				printf "File %s already exists in ~, backing up\n" " $file"
 			fi
 			mv -f ~/$file ~/dotfiles/backup
-			ln -s $(pwd)/$file ~/$file
+			ln -s $(pwd)/$file ~
+		else
+			ln -s $(pwd)/$file ~
 		fi
 	done
 	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d); do
-		ln -s $(pwd)/$dir ~ 2> /dev/null # Directories Soft Linking
-		if [[ $? -eq 1 ]] ; then
+		if [[ -d ~/$dir ]]; then
 			if [[ $1 == "-v" ]]; then
-				printf "Dir %s already in ~, preserving contents\n" "$dir"
+				printf "Dir %s already in ~, preserving content\n" "$dir"
 			fi
 			mkdir ~/tmp
-			mv -v ~/$dir/* ~/tmp > /dev/null
-			ln -s $(pwd)/$dir ~/$dir
-			mv -v ~/tmp/* ~/$dir > /dev/null 2> /dev/null
+			mv ~/$dir/* ~/tmp
+			rm -d ~/$dir
+			ln -s $(pwd)/$dir ~
+			mv -n ~/tmp/* ~/$dir
 			rm -rf ~/tmp
+		else
+			ln -s $(pwd)/$dir ~
 		fi
 	done
+	if [[ $delete_self == "true" ]]; then
+		rm -- $0
+	fi
 }
 
 # This gets the distro name (If possible)

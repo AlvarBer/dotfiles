@@ -27,8 +27,7 @@ linked folder
 -------------
 Everything here (files & folders) is (hard)linked into ~
 
-Don't put sensitive information here! It will appear in your github repository if you aren't carefull
-
+Careful with putting information here, it can end up in your repo (By default git will ignore it)
 
 
 [cowboy dotfiles]: https://github.com/cowboy/dotfiles
