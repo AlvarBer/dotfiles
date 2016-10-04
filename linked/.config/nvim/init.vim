@@ -1,0 +1,1 @@
+/home/mortadelegle/.vimrc

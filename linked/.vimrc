@@ -2,13 +2,14 @@
 " Minimal & functional
 
 " Visuals {{{
-syntax enable                          " Enable syntax processing
+syntax enable                         " Enable syntax processing
 
-" peachpuff, molokai, ron, badwolf
-colorscheme badwolf                  " Pretty good coloring
+" peachpuff, molokai, badwolf
+colorscheme badwolf                   " Pretty good coloring
 
-set number                             " Line numbers on the side
-"set cursorline                        " Highlight current line
+set number                            " Line numbers on the side
+set so=7                              " Lines cursor uses as offset when moving
+"set cursorline                       " Highlight current line
 "}}}
 
 " Indentation {{{
@@ -17,11 +18,6 @@ set softtabstop=4                      " Number of spaces when editing
 set shiftwidth=4                       " Defines what an indentation level is
 
 filetype indent on                     " Load filetype-specific indent files
-" }}}
-
-" Others {{{
-set modeline                           " This allows us to set files for this
-set modelines=1                        " specific file
 " }}}
 
 " Key Mapping {{{
@@ -41,11 +37,13 @@ nnoremap ^ <nop>
 
 " highlight last inserted text
 nnoremap gV `[v`]
-"}}}
+"}}} 
 
 " Search {{{
 set incsearch                          " Search as characters are entered
 set hlsearch                           " Highlight matches
+set ignorecase                         " Ignore case when searching
+set smartcase                          " Pattern having uppercase won't ignore
 
 " Turn off search highlight with space
 nnoremap <leader><space> :nohlsearch<CR>
@@ -59,6 +57,12 @@ set foldmethod=indent                  " fold based on indent level
 
 " Space open/closes folds
 nnoremap <space> za
+" }}}
+
+" Others {{{
+set modeline                          " This allows us to set files for this
+set modelines=1                       " specific file
+set encoding=utf8                     " Set utf8 as standard encoding (en_US)
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

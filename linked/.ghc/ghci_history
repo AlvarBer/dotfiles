@@ -1,0 +1,100 @@
+:r
+:r
+:r
+:r
+:t seq
+sumNumLtBigN 10^21
+:r
+sumNumLtBigN 10^21
+sumNumLtN 10^21
+:r
+:t seq
+sum'
+sumNumLtN 10^21
+sumNumLtBigN 10^21
+10^20
+10e20
+:set +s
+sumNumLtBigN 10^20
+sumNumLtN 10^20
+:load Lab2.hs 
+sumNumLtN 10^20
+:r
+sumNumLtN 10^20
+sumNumLtn 10^20
+sumNumLtBigN 10^20
+sumNumLtBigN 10e20
+:r
+sumNumLessThanALot''''' 
+:r
+nPowsOf3''' 10
+nPowsOf3'' 10
+nPowsOf3' 10
+nPowsOf3 10
+:r
+nPowsOf3'' 10
+nPowsOf3' 10
+nPowsOf3 10
+:r
+nPowsOf3 10
+:r
+length $ nPowsOf3 10
+length $ nPowsOf3' 10
+nPowsOf3' 10
+nPowsOf3 10
+:r
+nPowsOf3' 10
+nPowsOf3 10
+:r
+nPowsOf3' 10
+nPowsOf3 10
+:r
+nPowsOf3'' 10
+nPowsOf3' 10
+nPowsOf3 10
+:r
+:t take 3 [1..]
+:t take
+:r
+:r
+:r
+:r
+:load Lab2.hs 
+:r
+:t fix
+:r
+:r
+:r
+:r
+:t (^)
+:t take
+:r
+:r
+:r
+:R
+:t powsOf3LtN'
+:r
+:t takeWhile 
+:r
+powsOf3LtN 10e10
+powsOf3LtN' 10e10
+:r
+[0..5]
+powsOf3LtN' 10e10
+powsOf3LtN 10e10
+:r
+:r
+powsOf3LtN 10e10
+:r
+:r
+:r
+take 10 $ iterate (3^) 1
+powsOf3LtN' 100
+powsOf3LtN' 10
+:r
+take 10 $ iterate (\x -> 3^x) 1
+:t iterate
+take 10 $ iterate (\x -> 3^x) [1..]
+take 10 $ iterate(\x -> 3^x) [1..]
+take 10 $ iterate(3^) [1..]
+:t iterate
