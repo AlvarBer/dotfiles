@@ -1,21 +1,23 @@
 #!/bin/bash
 
-NAME=AlvarBer
-WEBSITE=github.com
-
 # Here we syncronize/pull all files and link them
-dotfiles() {
+synchronize() {
+	NAME=AlvarBer
+	WEBSITE=github.com
 	remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
 	sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
+	
 	get_distro
+	get_install
 
-	install=get_install
 	cd ~
 	if [[ ! $(type -P git) ]]; then
-		printf "Installing git"
+		if [[ $1 == "-v"  ]]; then
+			printf "Installing git\n"
+		fi
 		sudo ${install} git
 		if [[ $? -eq 1 ]]; then
-			printf "git couldn't be installed, install it and try again"
+			printf "git couldn't be installed, install it and try again\n"
 			exit 1
 		fi
 	fi
@@ -24,37 +26,40 @@ dotfiles() {
 		#git remote set-url origin sshurl
 		cd dotfiles
 		mkdir backup
-		get_distro
 		if [[ $(whoami) == "root" ]]; then 
 			install/${DISTRIB_ID}.sh 2> /dev/null
 		else
-			printf "You need sudo to install the programs" 
+			printf "You need sudo to install the programs\n" 
 		fi	
 	else
 		cd dotfiles
 		git fetch origin master
 		if [[ $(git rev-parse @) == $(git rev-parse @{u}) ]]; then
-			printf "No new changes in dotfiles upstream"
+			printf "No new changes in dotfiles upstream\n"
 			exit 0 # This conditionals checks for updates in the remote
 		fi
 		git merge origin/master
 	fi
 	cd linked
 	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f); do
-		ln -s $(pwd)/$file ~/$file # File Soft Linking
+		ln -s $(pwd)/$file ~/$file 2> /dev/null # File Soft Linking
 		if [[ $? -eq 1 ]] ; then
-			echo 'File already exists in ~, moving it to backup'
-			mv ~/$file ~/dotfiles/backup
+			if [[ $1 == "-v" ]]; then
+				printf "File %s already exists in ~, backing up\n" "$file"
+			fi
+			mv -n ~/$file ~/dotfiles/backup
 			ln -s $(pwd)/$file ~/$file
 		fi
 	done
 	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d); do
-		ln -s $(pwd)/$dir ~ # Directories Soft Linking
+		ln -s $(pwd)/$dir ~ 2> /dev/null # Directories Soft Linking
 		if [[ $? -eq 1 ]] ; then
-			echo 'Dir already exists in ~, preserving previous contents'
-			mv ~/$dir ~/tmp
+			if [[ $1 == "-v" ]]; then
+				printf "Dir %s already in ~, preserving contents\n" "$dir"
+			fi
+			mv -p ~/$dir ~/tmp
 			ln -s $(pwd)/$dir ~/$dir
-			mv -n ~/tmp/* ~/$dir
+			mv -n ~/tmp/* ~/$dir 
 			rm -rf ~/tmp
 		fi
 	done
@@ -66,7 +71,7 @@ get_distro() {
 		if [[ -f /etc/lsb-release ]]; then
 			source /etc/lsb-release
 		else
-			printf "Couldn't determine distro"
+			printf "Couldn't determine distro\n"
 			exit 1
 		fi
 	fi
@@ -74,10 +79,10 @@ get_distro() {
 
 get_install() {
 	case $DISTRIB_ID in
-		"elementary OS" "ubuntu" "debian") install="apt-get install";;
-		"apricity" "arch linux") install="pacman -S";;
+		"elementary OS" | "ubuntu" | "debian") install="apt-get install";;
+		"apricity" | "arch linux") install="pacman -S";;
 		*) install="apt-get install";;
 	esac
 }
 
-dotfiles "$@"
+synchronize $@

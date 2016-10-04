@@ -1,8 +1,10 @@
 dotfiles
 ========
-A dotfiles system inspired by [cowboy dotfiles].
+A minimal dotfiles system inspired by [cowboy dotfiles].
 
-Come where the magic happens.
+Mainly done for learning purposes, it might kill your dotfiles.
+
+It should work on most mayor Linux distros.
 
 backup folder
 -------------
@@ -10,7 +12,7 @@ Folder which fills up when a synchronization happens and there is a clash.
 
 bin folder
 ----------
-All files are considered executables.
+All files here are considered executables.
 
 `dotfiles.sh` is where the main synchronization happens.
 
@@ -23,7 +25,8 @@ the programs you want if the distro you are on is named as one of the scripts.
 
 linked folder
 -------------
-Everything here (files & folders) is sourced into ~
+Everything here (files & folders) is (hard)linked into ~
+
 
 
 [cowboy dotfiles]: https://github.com/cowboy/dotfiles
