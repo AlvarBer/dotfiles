@@ -34,24 +34,22 @@ shopt -s checkwinsize
 # Prompt & Colors
 
 # set a fancy prompt (non-color, unless we know we "want" color)
-if [ $(tput colors) -gt 1 ]; then
+if [[ $(tput colors) -gt 1 || $COLOUR == "yes" ]]; then
 	export COLOUR=yes # This doesn't cover all cases, but what does?
+	source ~/.bash_colours # Some Colours for convenience
+
+	# Colored GCC warning and errors
+	export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+	export TERM=screen-256color
 else
 	export COLOUR=no
 fi
 
-if [ "$COLOUR" = "yes" ]; then
-	. ~/.bash_colours # Source Bash Colours
-	
-	# colored GCC warnings and errors
-	export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-fi
-
-. ~/.bash_prompt
+source ~/.bash_prompt
 
 # Byobu Prompt in case we are in byobu
-if [ -r /home/mortadelegle/.byobu/prompt ]; then
-	. /home/mortadelegle/.byobu/prompt
+if [[ -r /home/mortadelegle/.byobu/prompt ]]; then
+	source /home/mortadelegle/.byobu/prompt
 fi
 
 ###############################################################################
@@ -65,7 +63,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [[ -f ~/.bash_aliases ]]; then
-	. ~/.bash_aliases
+	source ~/.bash_aliases
 fi
 
 ###############################################################################
@@ -75,9 +73,9 @@ fi
 # is already enabled in /etc/bash.bashrc and /etc/profile sources that file).
 if ! shopt -oq posix; then
 	if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-		. /usr/share/bash-completion/bash_completion
+		source /usr/share/bash-completion/bash_completion
 	elif [[ -f /etc/bash_completion ]]; then
-		. /etc/bash_completion
+		source /etc/bash_completion
 	fi
 fi
 
@@ -89,7 +87,7 @@ fi
 ###############################################################################
 # Autoenv Python virtualenv
 
-. ~/.autoenv/activate.sh
+source ~/.autoenv/activate.sh
 
 ###############################################################################
 # Dotfiles synchronization
@@ -104,3 +102,4 @@ PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
 
 export JAVA_HOME=/usr/bin/java
+
