@@ -8,7 +8,7 @@ Only works in some select Linux distros (Mainly those with apt-get Arch and Apri
 
 One liner
 ---------
-```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh -O - | sudo bash```
+```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && sudo bash ./dotfiles.sh```
 
 backup folder
 -------------
