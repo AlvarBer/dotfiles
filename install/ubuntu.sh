@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Add sublime text PPA and install it
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
