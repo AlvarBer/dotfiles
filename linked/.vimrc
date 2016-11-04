@@ -9,6 +9,8 @@ colorscheme badwolf                   " Pretty good coloring
 
 set number                            " Line numbers on the side
 set so=7                              " Lines cursor uses as offset when moving
+set ruler
+set rulerformat=%l,%c                 " Show line,col number on ruler
 "set cursorline                       " Highlight current line
 "}}}
 
