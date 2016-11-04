@@ -103,3 +103,5 @@ PATH=~/dotfiles/bin:$PATH
 
 export JAVA_HOME=/usr/bin/java
 
+EDITOR=vim
+
