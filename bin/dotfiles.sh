@@ -7,8 +7,6 @@ synchronize() {
 	remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
 	#sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
 	
-	get_distro
-
 	cd ~
 	if ! git --version >/dev/null 2>&1; then
 		echo git is not installed, install it and try again 2>&1
@@ -19,12 +17,16 @@ synchronize() {
 		git clone $remoteurl dotfiles
 		#git remote set-url origin sshurl
 		
-		cd dotfiles
-		mkdir backup
-		if [ "$(whoami)" = "root" ] && [ ! -z "$DISTRIB_ID" ]; then 
-			install/"${DISTRIB_ID}".sh
+		cd dotfiles && mkdir backup
+		if [ "$(id -u)" = 0 ]; then  # Checking for sudo
+			get_distro
+			if [ ! -z "$DISTRIB_ID" ]; then  # Checking distro
+				install/"${DISTRIB_ID}".sh
+			else
+				echo Your distro has not install script 2>&1
+			fi
 		else
-			echo You need sudo to install the programs or your distro has not a install script 2>&1
+			echo You need sudo to run install script 2>&1
 		fi
 	else
 		cd dotfiles
@@ -39,7 +41,7 @@ synchronize() {
 	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f); do
 		if [ -f ~/"$file" ]; then
 			if [ "$1" = "-v" ]; then
-				printf "File %s already exists in ~, backing up\n" "$file"
+				echo File "$file" already in ~, backing up
 			fi
 			mv -f ~/"$file" ~/dotfiles/backup
 			ln -s "$(pwd)"/"$file" ~
@@ -50,7 +52,7 @@ synchronize() {
 	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d); do
 		if [ -d ~/"$dir" ]; then
 			if [ "$1" = "-v" ]; then
-				printf "Dir %s already in ~, preserving content\n" "$dir"
+				echo Dir "$dir" already in ~, backing up
 			fi
 			mkdir ~/tmp
 			mv ~/"$dir"/* ~/tmp
@@ -78,8 +80,8 @@ get_distro() {
 
 add() {
 	for file in "$@"; do
-		mv "$file" ~/dotfiles
-		ln -s dotfiles/"$file" ~/linked
+		mv "$(pwd)"/"$file" ~/dotfiles
+		ln -ns dotfiles/"$file" ~/linked
 	done
 }
 
