@@ -3,27 +3,5 @@ backup/
 .ssh*
 
 bin/
-gtk*
-htop
-libreoffice
-midori
-google*
-software-center
-sublime-text-3/
-vlc
-pulse
-transmission
-evince
-dconf
-enchant
 
-chromium
-gpick
-ibus
-Trolltech.conf
-marlin
-plank
-mimeapps.list
-monitors.xml
-libaccounts-glib
-user-dirs*
+*.ps
