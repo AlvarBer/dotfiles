@@ -11,7 +11,7 @@ synchronize() {
 
 	cd ~
 	if ! git --version >/dev/null 2>&1; then
-		echo git is not installed, install it and try again
+		echo git is not installed, install it and try again 2>&1
 		exit 1
 	fi
 	if [ ! -d dotfiles ]; then
@@ -24,7 +24,7 @@ synchronize() {
 		if [ "$(whoami)" = "root" ] && [ ! -z "$DISTRIB_ID" ]; then 
 			install/"${DISTRIB_ID}".sh
 		else
-			echo You need sudo to install the programs or your distro has not a install script
+			echo You need sudo to install the programs or your distro has not a install script 2>&1
 		fi
 	else
 		cd dotfiles
@@ -70,7 +70,7 @@ get_distro() {
 		if [ -f /etc/lsb-release ]; then
 			. /etc/lsb-release
 		else
-			echo Could not determine distro
+			echo Could not determine distro 2>&1
 			DISTRIB_ID=
 		fi
 	fi
