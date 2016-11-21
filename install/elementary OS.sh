@@ -2,13 +2,14 @@
 
 
 # Install Firefox
-sudo apt-get install firefox
+sudo apt-get install firefox -y
 
-# Unistall midori piece of crap
-sudo apt-get purge midori
+# Unistall Midori
+sudo apt-get purge midori -y
 
 # Make computer not suspend when closing the lid
 sudo apt-get install dconf-editor
 
 # Run same config as in Ubuntu 
-source ./ubuntu.sh
+. ./ubuntu.sh
+

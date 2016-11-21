@@ -3,5 +3,5 @@ backup/
 .ssh*
 
 bin/
-
+doc/
 *.ps

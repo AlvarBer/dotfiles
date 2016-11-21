@@ -18,3 +18,6 @@ git clone http://github.com/kennethreitz/autoenv.git ~/.autoenv
 chmod g-w ~/.ghc
 chmod g-w ~/.ghc/ghci.conf
 
+# General upgrade
+sudo apt-get upgrade
+
