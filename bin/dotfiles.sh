@@ -1,12 +1,25 @@
-#!/bin/sh
+#!/bin/env sh
 
-# Here we syncronize/pull all files and link them
-synchronize() {
-	NAME=AlvarBer
-	WEBSITE=github.com
-	remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
-	#sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
-	
+# synch pull lastest changes and merges them
+synch() {
+	cd dotfiles
+	git fetch origin master
+	if [ "$(git rev-parse master)" = "$(git rev-parse origin/master)" ]; then
+		echo No new changes in dotfiles upstream
+		exit 0
+	else
+		git merge origin/master  # Simple update, no relinking
+		if git diff --name-status master origin/master | grep -E "^A|^C|^R|^T"; then
+			if [ "$verbose" ]; then
+				echo Relinking
+			fi
+			link_linked "$(find linked/ | -path linked/)"  # Relinking
+		fi
+	fi
+}
+
+# clone is for the first tim we run dotfiles
+clone() {
 	cd ~
 	if ! git --version >/dev/null 2>&1; then
 		echo git is not installed, install it and try again 2>&1
@@ -14,86 +27,93 @@ synchronize() {
 	fi
 	if [ ! -d dotfiles ]; then
 		echo Cloning dotfiles repo
-		git clone $remoteurl dotfiles
+		git clone "$remoteurl" dotfiles
 		#git remote set-url origin sshurl
 		
-		cd dotfiles && mkdir backup
-		if [ "$(id -u)" = 0 ]; then  # Checking for sudo
-			get_distro
-			if [ ! -z "$DISTRIB_ID" ]; then  # Checking distro
-				install/"${DISTRIB_ID}".sh
-			else
-				echo Your distro has not install script 2>&1
-			fi
-		else
-			echo You need sudo to run install script 2>&1
-		fi
+		installs
+		link_linked "$(find linked/ ! -path linked/)"
 	else
-		cd dotfiles
-		git fetch origin master
-		if [ "$(git rev-parse @)" = "$(git rev-parse @{u})" ]; then
-			echo No new changes in dotfiles upstream
-			exit 0
-		fi
-		git merge origin/master
+		echo Already cloned!
+		exit 1
 	fi
-	cd linked
-	for file in $(find . -maxdepth 1 -mindepth 1 -name * -type f); do
-		if [ -f ~/"$file" ]; then
-			if [ "$1" = "-v" ]; then
-				echo File "$file" already in ~, backing up
-			fi
-			mv -f ~/"$file" ~/dotfiles/backup
-			ln -s "$(pwd)"/"$file" ~
-		else
-			ln -s "$(pwd)"/"$file" ~
-		fi
-	done
-	for dir in $(find . -maxdepth 1 -mindepth 1 -name * -type d); do
-		if [ -d ~/"$dir" ]; then
-			if [ "$1" = "-v" ]; then
-				echo Dir "$dir" already in ~, backing up
-			fi
-			mkdir ~/tmp
-			mv ~/"$dir"/* ~/tmp
-			rm -d ~/"$dir"
-			ln -s "$(pwd)"/"$dir" ~
-			mv -n ~/tmp/* ~/"$dir"
-			rm -rf ~/tmp
-		else
-			ln -s "$(pwd)"/"$dir" ~
-		fi
-	done
 }
 
-# This gets the distro name (If possible)
-get_distro() {
-	if [ -z "$DISTRIB_ID" ]; then
-		if [ -f /etc/lsb-release ]; then
-			. /etc/lsb-release
+# installs installs the specific script
+installs() {
+	cd ~/dotfiles
+	if [ "$(id -u)" = 0 ]; then  # Checking for sudo
+		${DISTRIB_ID:-$(. /etc/lsb-release)}
+		if [ ! -z "$DISTRIB_ID" ]; then  # Checking distro
+			install/"${DISTRIB_ID}".sh
 		else
-			echo Could not determine distro 2>&1
-			DISTRIB_ID=
+			echo Your distro has not install script 2>&1
+			exit 1
 		fi
+	else
+		echo You need sudo to run install script 2>&1
+		exit 1
 	fi
+}
+
+# link_linked is the main linking process, it is used both for clone and synch
+link_linked() {
+	cd ~/dotfiles
+	rm -rf backup
+	mkdir backup
+	for file in $1; do
+		if [ -f ~/"$file" ]; then  # If the linked file is already at ~
+			mv ~/"$file" backup/"$file"  # We move it to backup
+			if [ "$verbose" ]; then
+				echo "$file" moved to backup
+			fi
+		else
+			if [ ! -d "$(dirname "$file")" ]; then  # If some of the dirs don't exist
+				mkdir --parents "$(dirname "$file")"  # We create them
+				if [ "$verbose" ]; then
+					echo Dirs "$(dirname "$file")" created
+				fi
+			fi
+		fi
+		#ln -nsr "$file" ~/$(dirname "$file") deferences links :(
+		ln --symbolic --no-deference "$(pwd)"/"$file" ~/"$(dirname "$file")"
+	done
 }
 
 add() {
-	for file in "$@"; do
-		mv "$(pwd)"/"$file" ~/dotfiles
-		ln -ns dotfiles/"$file" ~/linked
-	done
+	echo Pending functionality
 }
 
 # Script itself
 set -eo pipefail
+NAME=AlvarBer
+WEBSITE=github.com
+remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
+#sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
+
 case $1 in
+	-v | --verbose)
+		verbose=True
+		shift
+		synch;;
 	add)
 		shift
 		add "$@";;
 	unlink)
 		echo Pending functionality;;
+	clone)
+		shift
+		clone;;
+	install)
+		shift
+		installs;;
+	sync)
+		shift
+		synch;;
 	*)
-		synchronize "$@";;
+		if [ ! -d ~/dotfiles ]; then
+			clone
+		else
+			synch
+		fi;;
 esac
 

@@ -1,6 +1,8 @@
 " Álvaro Bermejo .vimrc
 " Minimal & functional
 
+set nocompatible                       " Allows for all kinds of shenanigans
+
 " Visuals {{{
 syntax enable                         " Enable syntax processing
 
@@ -21,6 +23,7 @@ set showmatch                         " highlight matching [{()}]
 set tabstop=4                          " Visual Spaces per tab
 set softtabstop=4                      " Number of spaces inserted when editing
 set shiftwidth=4                       " Defines what an indentation level is
+set smarttab                           " Tab for indent, space for alignment
 
 filetype indent on                     " Load file type specific indent files
 "}}}
