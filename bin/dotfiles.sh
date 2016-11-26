@@ -62,7 +62,7 @@ link_linked() {
 	mkdir backup
 	for file in $1; do
 		if [ -f ~/"$file" ]; then  # If the linked file is already at ~
-			mv ~/"$file" backup/"$file"  # We move it to backup
+			mv ~/"$file" backup/  # We move it to backup
 			if [ "$verbose" ]; then
 				echo "$file" moved to backup
 			fi
