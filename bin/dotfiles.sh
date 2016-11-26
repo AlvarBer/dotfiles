@@ -13,7 +13,7 @@ synch() {
 			if [ "$verbose" ]; then
 				echo Relinking
 			fi
-			link_linked "$(find linked/ | -path linked/)"  # Relinking
+			link_linked "$(find linked/ -type f -or -type l)"  # Relinking
 		fi
 	fi
 }
@@ -32,7 +32,7 @@ clone() {
 		
 		installs
 		cd ~/dotfiles
-		link_linked "$(find linked/ ! -path linked/)"
+		link_linked "$(find linked/ -type f -or -type l)"
 	else
 		echo Already cloned!
 		exit 1
