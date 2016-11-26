@@ -67,7 +67,7 @@ link_linked() {
 				echo "$file" moved to backup
 			fi
 		else
-			if [ ! -d "$(dirname "$file")" ]; then  # If some of the dirs don't exist
+			if [ ! -d ~/"$(dirname "$file")" ]; then  # If some of the dirs don't exist
 				mkdir --parents ~/"$(dirname "$file")"  # We create them
 				if [ "$verbose" ]; then
 					echo Dirs ~/"$(dirname "$file")" created
