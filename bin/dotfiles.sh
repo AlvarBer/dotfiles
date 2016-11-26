@@ -2,7 +2,7 @@
 
 # synch pull lastest changes and merges them
 synch() {
-	cd dotfiles
+	cd ~/dotfiles
 	git fetch origin master
 	if [ "$(git rev-parse master)" = "$(git rev-parse origin/master)" ]; then
 		echo No new changes in dotfiles upstream
@@ -31,6 +31,7 @@ clone() {
 		#git remote set-url origin sshurl
 		
 		installs
+		cd dotfiles
 		link_linked "$(find linked/ ! -path linked/)"
 	else
 		echo Already cloned!
@@ -116,4 +117,3 @@ case $1 in
 			synch
 		fi;;
 esac
-
