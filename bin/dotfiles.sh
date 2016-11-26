@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
 # synch pull lastest changes and merges them
 synch() {
@@ -84,10 +84,10 @@ add() {
 }
 
 # Script itself
-set -eo pipefail
+set -e
 NAME=AlvarBer
 WEBSITE=github.com
-remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
+remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles_dev.git
 #sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
 
 case $1 in
