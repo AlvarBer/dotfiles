@@ -48,11 +48,9 @@ installs() {
 			install/"${DISTRIB_ID}".sh
 		else
 			echo Your distro has not install script 2>&1
-			exit 1
 		fi
 	else
 		echo You need sudo to run install script 2>&1
-		exit 1
 	fi
 }
 
