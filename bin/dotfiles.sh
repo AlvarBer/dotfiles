@@ -31,7 +31,7 @@ clone() {
 		#git remote set-url origin sshurl
 		
 		installs
-		cd dotfiles
+		cd ~/dotfiles
 		link_linked "$(find linked/ ! -path linked/)"
 	else
 		echo Already cloned!
