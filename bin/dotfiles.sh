@@ -60,22 +60,22 @@ link_linked() {
 	cd ~/dotfiles/linked
 	rm -rf backup
 	mkdir backup
-	for file in $1; do
-		if [ -f ~/"$file" ]; then  # If the linked file is already at ~
-			mv ~/"$file" backup/  # We move it to backup
+	for element in $1; do
+		if [ -f ~/"$element" ] || [ -d ~/"$element" ]; then  # If the linked file is already at ~
+			mv ~/"$element" backup/  # We move it to backup
 			if [ "$verbose" ]; then
-				echo "$file" moved to backup
+				echo "$element" moved to backup
 			fi
 		else
-			if [ ! -d ~/"$(dirname "$file")" ]; then  # If some of the dirs don't exist
-				mkdir --parents ~/"$(dirname "$file")"  # We create them
+			if [ ! -d ~/"$(dirname "$element")" ]; then  # If some of the dirs don't exist
+				mkdir --parents ~/"$(dirname "$element")"  # We create them
 				if [ "$verbose" ]; then
-					echo Dirs ~/"$(dirname "$file")" created
+					echo Dirs ~/"$(dirname "$element")" created
 				fi
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") deferences links :(
-		ln --symbolic --no-dereference "$(pwd)"/"$file" ~/"$file"
+		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$element"
 	done
 }
 
