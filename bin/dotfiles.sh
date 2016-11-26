@@ -13,7 +13,8 @@ synch() {
 			if [ "$verbose" ]; then
 				echo Relinking
 			fi
-			link_linked "$(find linked/ -type f -or -type l)"  # Relinking
+			cd linked/
+			link_linked "$(find . -type f -or -type l)"  # Relinking
 		fi
 	fi
 }
@@ -31,8 +32,8 @@ clone() {
 		#git remote set-url origin sshurl
 		
 		installs
-		cd ~/dotfiles
-		link_linked "$(find linked/ -type f -or -type l)"
+		cd ~/dotfiles/linked
+		link_linked "$(find . -type f -or -type l)"
 	else
 		echo Already cloned!
 		exit 1
@@ -56,7 +57,7 @@ installs() {
 
 # link_linked is the main linking process, it is used both for clone and synch
 link_linked() {
-	cd ~/dotfiles
+	cd ~/dotfiles/linked
 	rm -rf backup
 	mkdir backup
 	for file in $1; do
@@ -67,14 +68,14 @@ link_linked() {
 			fi
 		else
 			if [ ! -d "$(dirname "$file")" ]; then  # If some of the dirs don't exist
-				mkdir --parents "$(dirname "$file")"  # We create them
+				mkdir --parents ~/"$(dirname "$file")"  # We create them
 				if [ "$verbose" ]; then
-					echo Dirs "$(dirname "$file")" created
+					echo Dirs ~/"$(dirname "$file")" created
 				fi
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") deferences links :(
-		ln --symbolic --no-dereference "$(pwd)"/"$file" ~/"$(dirname "$file")"
+		ln --symbolic --no-dereference "$(pwd)"/"$file" ~/"$file"
 	done
 }
 
@@ -88,6 +89,8 @@ NAME=AlvarBer
 WEBSITE=github.com
 remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles_dev.git
 #sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
+
+verbose=True
 
 case $1 in
 	-v | --verbose)
