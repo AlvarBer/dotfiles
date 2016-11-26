@@ -74,7 +74,7 @@ link_linked() {
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") deferences links :(
-		ln --symbolic --no-deference "$(pwd)"/"$file" ~/"$(dirname "$file")"
+		ln --symbolic --no-dereference "$(pwd)"/"$file" ~/"$(dirname "$file")"
 	done
 }
 
