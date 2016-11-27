@@ -2,13 +2,19 @@ dotfiles <img src="https://raw.githubusercontent.com/jglovier/dotfiles-logo/mast
 ========
 A minimal dotfiles system inspired by [cowboy dotfiles].
 
-Mainly done for learning purposes, backup everything you hold dear.
+Dotfiles should accommodate to your needs, these dotfiles are simple, yet handle relative complex config such as symlink directories.
 
-Only works in some select Linux distros (Mainly those with apt-get Arch and Apricity).
+Written on POSIX shell, should work on almost anything unix-y.
 
 One liner
 ---------
-```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && sudo bash ./dotfiles.sh```
+```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && sudo ./dotfiles.sh```
+
+Quick guide
+-----------
+Every folder does something different, following are the functions of each one, if you are installing for the first time
+you run the one liner and it should be done.
+After that you hav different options, but with a `dotfiles.sh` your dotfiles should synchronize with your remote repo.
 
 backup folder
 -------------
@@ -29,9 +35,9 @@ the programs you want if the distro you are on is named as one of the scripts.
 
 linked folder
 -------------
-Everything here (files & folders) is (hard)linked into ~
+Everything here (files & empty folder that are soft links) are symlinked into ~
 
-Careful with putting information here, it can end up in your repo (By default git will ignore it)
+Careful with putting information here like ssh, it can end up in your repo.
 
 
 [cowboy dotfiles]: https://github.com/cowboy/dotfiles
