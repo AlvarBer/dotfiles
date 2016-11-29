@@ -87,7 +87,7 @@ add() {
 set -e
 NAME=AlvarBer
 WEBSITE=github.com
-remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles_dev.git
+remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
 #sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
 
 verbose=True
