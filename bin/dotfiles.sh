@@ -58,24 +58,24 @@ installs() {
 # link_linked is the main linking process, it is used both for clone and synch
 link_linked() {
 	cd ~/dotfiles/linked
-	rm -rf backup
-	mkdir backup
+	rm -rf backup && mkdir ../backup
 	for element in $1; do
-		if [ -f ~/"$element" ] || [ -d ~/"$element" ]; then  # If the linked file is already at ~
-			mv ~/"$element" backup/  # We move it to backup
+		if [ -f ~/"$element" ] || [ -d ~/"$element" ]; then  # If the linked file already at ~
+			mv ~/"$element" ../backup/  # We move it to backup
 			if [ "$verbose" ]; then
 				echo "$element" moved to backup
 			fi
-		else
-			if [ ! -d ~/"$(dirname "$element")" ]; then  # If some of the dirs don't exist
-				mkdir --parents ~/"$(dirname "$element")"  # We create them
-				if [ "$verbose" ]; then
-					echo Dirs ~/"$(dirname "$element")" created
-				fi
+		elif [ ! -d ~/"$(dirname "$element")" ]; then  # If some of the dirs don't exist
+			mkdir --parents ~/"$(dirname "$element")"  # We create them
+			if [ "$verbose" ]; then
+				echo Dirs ~/"$(dirname "$element")" created
 			fi
 		fi
-		#ln -nsr "$file" ~/$(dirname "$file") deferences links :(
+		#ln -nsr "$file" ~/$(dirname "$file") dereferences links :(
 		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$element"
+		if [ "$verbose" ]; then
+			echo $element is now linked on ~
+		fi
 	done
 }
 
