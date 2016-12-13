@@ -12,11 +12,14 @@ colorscheme badwolf                   " Pretty good colouring
 set number                            " Line numbers on the side
 set so=7                              " Lines cursor uses as offset when moving
 set ruler
-set rulerformat=%l,%c                 " Show line,col number on ruler
+set rulerformat=%l,%v                 " Show line,col number on ruler
+
 set showcmd                           " Show last command
 "set cursorline                       " Highlight current line
 set wildmenu                          " visual auto complete for command menu
 set showmatch                         " highlight matching [{()}]
+
+set nowrap                            " Don't warp text aroun d
 "}}}
 
 " Indentation {{{
@@ -29,6 +32,8 @@ filetype indent on                     " Load file type specific indent files
 "}}}
 
 " Key Mapping {{{
+set mouse=                             " Disable mouse
+
 let mapleader = "-"                    " Leader key is the minus sign
 let maplocalleader = "--"
 

@@ -1,1 +1,1 @@
-/home/mortadelegle/.vimrc
+../../.vimrc
