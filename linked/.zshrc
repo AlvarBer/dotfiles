@@ -1,6 +1,7 @@
 source /usr/share/zsh/site-contrib/powerline.zsh
 
 source ~/.aliases.sh
+source /usr/local/bin/notifyosd.zsh/notifyosd.zsh
 
 # Exporting variables
 export TERM=screen-256color
