@@ -30,6 +30,10 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# Export some variables
+export JAVA_HOME=/usr/bin/java
+export EDITOR=vim
+
 ###############################################################################
 # Prompt & Colors
 
@@ -62,8 +66,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [[ -f ~/.bash_aliases ]]; then
-	source ~/.bash_aliases
+if [[ -f ~/.aliases ]]; then
+	source ~/.aliases
 fi
 
 ###############################################################################
@@ -100,8 +104,4 @@ TMP=${TMP%:}
 TMP=${TMP#:}
 PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
-
-export JAVA_HOME=/usr/bin/java
-
-EDITOR=vim
 

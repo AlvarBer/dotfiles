@@ -19,7 +19,7 @@ set showcmd                           " Show last command
 set wildmenu                          " visual auto complete for command menu
 set showmatch                         " highlight matching [{()}]
 
-set nowrap                            " Don't warp text aroun d
+set nowrap                            " Don't warp text around
 "}}}
 
 " Indentation {{{
@@ -48,8 +48,10 @@ noremap E $
 " Spell check with S, suggestions with s
 noremap S :set spell spelllang=en_gb<cr>
 noremap s z=
-noremap <leader>s zg
+
+" Disable spell wit <leader>S, add word with <leader>s
 noremap <leader>S :set nospell<cr>
+noremap <leader>s zg
 
 " Open NerdTree with q
 noremap q :NERDTree<cr>

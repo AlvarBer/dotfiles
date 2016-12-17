@@ -1,11 +1,9 @@
-# My own personal handy aliases
-
+# These talk too much
 alias octave="octave-cli --silent"
 alias gradle="gradle -q"
 
-# enable color support of ls and also add handy aliases
+# Color aliases 
 if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 	alias ls='ls --color=auto'
 	alias dir='dir --color=auto'
 	alias vdir='vdir --color=auto'
