@@ -1,6 +1,6 @@
 source /usr/share/zsh/site-contrib/powerline.zsh
 
-source ~/.aliases
+source ~/.aliases.sh
 
 # Exporting variables
 export TERM=screen-256color
