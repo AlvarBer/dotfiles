@@ -2,7 +2,10 @@ source /usr/share/zsh/site-contrib/powerline.zsh
 
 source ~/.aliases
 
+# Exporting variables
 export TERM=screen-256color
+export JAVA_HOME=/usr/bin/java
+export EDITOR=nvim
 
 # Autocompletion
 zstyle ':completion:*' menu select
@@ -11,4 +14,5 @@ autoload bashcompinit
 compinit
 bashcompinit
 eval "$(pandoc --bash-completion)"
+
 
