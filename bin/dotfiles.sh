@@ -58,9 +58,9 @@ installs() {
 # link_linked is the main linking process, it is used both for clone and synch
 link_linked() {
 	cd ~/dotfiles/linked
-	rm -rf backup && mkdir ../backup
+	rm -rf ../backup && mkdir ../backup
 	for element in $1; do
-		if [ -f ~/"$element" ] || [ -d ~/"$element" ]; then  # If the linked file already at ~
+		if [ -f ~/"$element" ] || [ -d ~/"$element" ] || [ -h ~/"$element" ]; then  # If the linked file already at ~
 			mv ~/"$element" ../backup/  # We move it to backup
 			if [ "$verbose" ]; then
 				echo "$element" moved to backup
@@ -90,31 +90,36 @@ WEBSITE=github.com
 remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
 #sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
 
-verbose=True
-
-case $1 in
-	-v | --verbose)
-		verbose=True
-		shift
-		synch;;
-	add)
-		shift
-		add "$@";;
-	unlink)
-		echo Pending functionality;;
-	clone)
-		shift
-		clone;;
-	install)
-		shift
-		installs;;
-	sync)
-		shift
-		synch;;
-	*)
-		if [ ! -d ~/dotfiles ]; then
-			clone
-		else
-			synch
-		fi;;
-esac
+while [ $# -gt 0 ]; do
+	case $1 in
+		-v | --verbose)
+			verbose=True
+			shift;;
+		add)
+			action="add '$@'"
+			shift;;
+		unlink)
+			echo Pending functionality
+			shift;;
+		clone)
+			action=clone
+			shift;;
+		install)
+			action=installs
+			shift;;
+		sync)
+			action=synch
+			shift;;
+		link)
+			action='cd ~/dotfiles/linked && link_linked "$(find . -type f -or -type l)"'
+			shift;;
+		*)
+			if [ ! -d ~/dotfiles ]; then
+				action=clone
+			else
+				action=synch
+			fi
+			shift;;
+	esac
+done
+eval $action
