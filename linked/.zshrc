@@ -1,6 +1,10 @@
 source /usr/share/zsh/site-contrib/powerline.zsh
 
+# Source handy aliases
 source ~/.aliases.sh
+# And cool colors
+source ~/.colours.sh
+# And notifications
 source /usr/local/bin/notifyosd.zsh/notifyosd.zsh
 
 # Exporting variables

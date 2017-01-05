@@ -40,7 +40,7 @@ export EDITOR=vim
 # set a fancy prompt (non-color, unless we know we "want" color)
 if [[ $(tput colors) -gt 1 || $COLOUR == "yes" ]]; then
 	export COLOUR=yes # This doesn't cover all cases, but what does?
-	source ~/.bash_colours # Some Colours for convenience
+	source ~/.colours.sh # Some Colours for convenience
 
 	# Colored GCC warning and errors
 	export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
