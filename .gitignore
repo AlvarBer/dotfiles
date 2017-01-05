@@ -1,7 +1,12 @@
+# Caches/backups folders
 Cache
 backup/
+
+# SSH keys
 .ssh*
 
+# Binaries
 bin/
-doc/
-*.ps
+
+# Vim plugins folder
+plugged/

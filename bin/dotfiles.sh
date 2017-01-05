@@ -8,9 +8,9 @@ synch() {
 		echo No new changes in dotfiles upstream
 		exit 0
 	else
-		git merge origin/master  # Simple update, no relinking
+		git merge origin/master  # Simple update
 		if git diff --name-status master origin/master | grep -E "^A|^C|^R|^T"; then
-			if [ "$verbose" ]; then
+			if [ "$verbose" ]; then  # Not so simple update
 				echo Relinking
 			fi
 			cd linked/
