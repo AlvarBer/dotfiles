@@ -20,4 +20,7 @@ compinit
 bashcompinit
 eval "$(pandoc --bash-completion)"
 
+# Add dotfiles binary folder to path if not already on it
+export PATH=~/dotfiles/bin:$PATH
+
 
