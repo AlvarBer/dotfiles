@@ -14,7 +14,7 @@ synch() {
 				echo Relinking
 			fi
 			cd linked/
-			link_linked "$(find . -type f -or -type l)"  # Relinking
+			link_linked "$(find . -type f -or -type l -printf '%P\n')"  # Relinking
 		fi
 	fi
 }
@@ -33,7 +33,7 @@ clone() {
 		
 		installs
 		cd ~/dotfiles/linked
-		link_linked "$(find . -type f -or -type l)"
+		link_linked "$(find . -type f -or -type l -printf '%P\n')"
 	else
 		echo Already cloned!
 		exit 1
@@ -59,7 +59,7 @@ installs() {
 link_linked() {
 	cd ~/dotfiles/linked
 	rm -rf ../backup && mkdir ../backup
-	for element in $1; do
+	for element in $(find -H . -type f -or -type l | sed 's|./||'); do
 		if [ -f ~/"$element" ] || [ -d ~/"$element" ] || [ -h ~/"$element" ]; then  # If the linked file already at ~
 			mv ~/"$element" ../backup/  # We move it to backup
 			if [ "$verbose" ]; then
@@ -72,7 +72,7 @@ link_linked() {
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") dereferences links :(
-		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$element"
+		ln --symbolic --no-dereference --target-directory="$HOME/$(dirname "$element")" "$(pwd)"/"$element"
 		if [ "$verbose" ]; then
 			echo $element is now linked on ~
 		fi
@@ -82,6 +82,7 @@ link_linked() {
 add() {
 	echo Pending functionality
 }
+
 
 # Script itself
 set -e
@@ -110,8 +111,10 @@ while [ $# -gt 0 ]; do
 		sync)
 			action=synch
 			shift;;
+		test)
+			shift;;
 		link)
-			action='cd ~/dotfiles/linked && link_linked "$(find . -type f -or -type l)"'
+			action="cd ~/dotfiles/linked && link_linked" 
 			shift;;
 		*)
 			if [ ! -d ~/dotfiles ]; then
