@@ -60,7 +60,7 @@ link_linked() {
 	cd ~/dotfiles/linked
 	rm -rf ../backup && mkdir ../backup
 	for element in $(find -H . -type f -or -type l | sed 's|./||'); do
-		if [ -f ~/"$element" ] || [ -d ~/"$element" ] || [ -h ~/"$element" ]; then  # If the linked file already at ~
+		if [ -f ~/"$element" ] || [ -d ~/"$element" ] || [ -L ~/"$element" ]; then  # If the linked file already at ~
 			mv ~/"$element" ../backup/  # We move it to backup
 			if [ "$verbose" ]; then
 				echo "$element" moved to backup
@@ -72,7 +72,7 @@ link_linked() {
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") dereferences links :(
-		ln --symbolic --no-dereference --target-directory="$HOME/$(dirname "$element")" "$(pwd)"/"$element"
+		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$(dirname "$element")" 
 		if [ "$verbose" ]; then
 			echo $element is now linked on ~
 		fi
