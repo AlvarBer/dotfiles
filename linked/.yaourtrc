@@ -1,0 +1,7 @@
+# Yaourt options
+
+BUILD_NOCONFIRM=1  # No prompts during pakcage building
+
+EDITFILES=0  # No file editing
+
+DEVEL=1  # Always look for development versions
