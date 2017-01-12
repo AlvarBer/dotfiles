@@ -109,7 +109,7 @@ Plug 'vim-scripts/TagHighlight' " Tag highlighting
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags' " Automatic Tags
 let g:easy_tags_by_filetype=1 " Tags by filetype
 let g:easy_tags_async = 1 " Asynchronous tagging
-let g:easy_tags_events = ['BufWritePost', 'CursorHold', 'CursorHoldI']
+let g:easy_tags_events = ['BufReadPost', 'BufWritePost'] " Not working!
 let g:easytags_suppress_report = 1 " Easytags talks too much
 
 call plug#end()
