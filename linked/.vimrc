@@ -29,7 +29,7 @@ set softtabstop=4                      " Number of spaces inserted when editing
 set shiftwidth=4                       " Defines what an indentation level is
 set smarttab                           " Tab for indent, space for alignment
 
-filetype indent on                     " Load file type specific indent files
+filetype plugin indent on              " Load file type specific indent files
 "}}}
 
 " Key Mapping {{{
@@ -96,6 +96,7 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags' " Automatic Tags
 let g:easy_tags_by_filetype=1          " Tags by filetype
 let g:easy_tags_async = 1              " Asynchronous tagging
 let g:easy_tags_events = ['BufWritePost', 'CursorHold', 'CursorHoldI']
+let g:easytags_suppress_report = 1     " Easytags talks too much
 
 call plug#end()
 "}}}
