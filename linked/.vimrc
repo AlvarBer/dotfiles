@@ -56,7 +56,7 @@ noremap E $
 
 """ Spelling
 " Toggle Spell check with S, suggestions with s (:set spell spelllang=en_gb)
-noremap <leader>S :set spell!<cr>
+noremap S :set spell!<cr>
 noremap s z=
 
 """ Misc
@@ -73,11 +73,11 @@ noremap q :NERDTreeToggle<cr>
 nnoremap <space> za
 
 " z removes trailing space
-nnoremap z :%s/\s\+$//e<cr>
+nnoremap z :%s/\s\+$//e<cr> :write<cr>
 
 " Z locates our cursor
 nnoremap Z :set cursorline! cursorcolumn!<cr>
-
+ 
 " $/^ won't do anything
 noremap $ <nop>
 noremap ^ <nop>
