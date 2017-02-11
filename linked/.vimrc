@@ -101,6 +101,7 @@ set foldmethod=indent        " fold based on indent level
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " File browser
+let NERDTreeIgnore = ['\.log', '\.aux', '\.pdf', '__pycache__']
 Plug 'vim-airline/vim-airline' " Powerline
 let g:airline_powerline_fonts = 1 " Powerline symbols
 Plug 'vim-airline/vim-airline-themes' " Powerline themes
