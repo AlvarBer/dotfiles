@@ -112,19 +112,26 @@ while [ $# -gt 0 ]; do
 		sync)
 			action=synch
 			shift;;
-		test)
-			shift;;
 		link)
 			action="cd ~/dotfiles/linked && link_linked"
 			shift;;
-		*)
-			if [ ! -d ~/dotfiles ]; then
-				action=clone
-			else
-				action=synch
-			fi
+		-h | --help | *)
+			echo "Dotfiles is a configuration management system
+Usage: dotfiles.sh [OPTION] [COMMAND]
+
+Commands
+clone                clones the repository and tries to install
+install              install programs
+sync                 pulls and merges
+link                 relinks folder with local repo
+
+Options
+-v, --verbose        get verbose output
+-h, --help           show this message
+			"
 			shift;;
 	esac
 done
 
 eval $action
+
