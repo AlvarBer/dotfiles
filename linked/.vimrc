@@ -7,6 +7,12 @@ set nocompatible             " Where we are going we don't need vi
 syntax enable                " Enable syntax processing
 
 set encoding=utf8            " Set utf8 as standard encoding
+
+" Opens file on last known position
+"autocmd BufReadPost *
+"     \ if line("'\"") > 1 && line("'\"") <= line("$") |
+"     \   exe "normal! g`\"" |
+"     \ endif
 "}}}
 
 " Visuals {{{
@@ -18,13 +24,13 @@ set scrolloff=7              " Always at least 7 vertical lines either side
 
 set laststatus=2             " Show line with file being edited (And powerline)
 
-set showmode                 " Show mode (Not needed with powerline
+set showmode                 " Show mode (Not needed with powerline)
 set showcmd                  " Show last command
 "set cursorline              " Highlight current line
 set wildmenu                 " visual auto complete for command menu
 set showmatch                " highlight matching [{()}]
 
-set nowrap                   " Don't warp text around
+set nowrap                   " Don't wrap text around
 "}}}
 
 " Indentation {{{
@@ -33,7 +39,7 @@ set shiftwidth=4             " 4 Characters per tab
 "set softtabstop=4           " Consider 4 spaces a tab
 
 set autoindent               " Needed for smartindent
-set smartindent              " Expresion-based indentation
+set smartindent              " Expression-based indentation
 
 filetype plugin indent on    " filetype specific indent and plugins
 "}}}
@@ -46,7 +52,7 @@ let mapleader = "-"          " Leader key is the minus sign
 let maplocalleader = "--"    " Local leader is twice the leader
 
 """ Movement
-" Vertical move by visual line
+" Vertical move by visual line (and oh yeah, I use arrows)
 nnoremap <up> gk
 nnoremap <down> gj
 
@@ -59,10 +65,11 @@ noremap E $
 noremap S :set spell!<cr>
 noremap s z=
 
-""" Misc
 " Add word with <leader>s
 noremap <leader>s zg
 
+
+""" Misc
 " Turn off search highlight with space
 nnoremap <leader><space> :nohlsearch<cr>
 
@@ -77,7 +84,7 @@ nnoremap z :%s/\s\+$//e<cr> :write<cr>
 
 " Z locates our cursor
 nnoremap Z :set cursorline! cursorcolumn!<cr>
- 
+
 " $/^ won't do anything
 noremap $ <nop>
 noremap ^ <nop>
@@ -88,6 +95,7 @@ set incsearch                " Search as characters are entered
 set hlsearch                 " Highlight matches
 set ignorecase               " Ignore case when searching
 set smartcase                " Pattern having upper-case won't ignore
+set path+=**                 " Do recursive file search from current dir
 "}}}
 
 " Folds {{{
@@ -95,6 +103,16 @@ set foldenable               " Enable folding
 set foldlevelstart=10        " open most folds by default
 set foldnestmax=10           " 10 nested fold max
 set foldmethod=indent        " fold based on indent level
+"}}}
+
+" Persistence {{{
+set viewoptions=folds,options,cursor
+" Save folds between sessions
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave ?* mkview
+  autocmd BufWinEnter ?* silent! loadview
+augroup END
 "}}}
 
 " Plugins {{{

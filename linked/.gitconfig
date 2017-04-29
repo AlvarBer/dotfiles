@@ -8,5 +8,5 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /home/mortadelegle/.gitignore_global
-	editor = vim
+	excludesfile = ~/.gitignore_global
+	editor = nvim

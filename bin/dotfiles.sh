@@ -19,7 +19,7 @@ synch() {
 	fi
 }
 
-# clone is for the first tim we run dotfiles
+# clone is for the first time we run dotfiles
 clone() {
 	cd ~
 	if ! git --version >/dev/null 2>&1; then
@@ -30,7 +30,7 @@ clone() {
 		echo Cloning dotfiles repo
 		git clone "$remoteurl" dotfiles
 		#git remote set-url origin sshurl
-		
+
 		installs
 		cd ~/dotfiles/linked
 		link_linked "$(find . -type f -or -type l -printf '%P\n')"
@@ -72,9 +72,9 @@ link_linked() {
 			fi
 		fi
 		#ln -nsr "$file" ~/$(dirname "$file") dereferences links :(
-		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$(dirname "$element")" 
+		ln --symbolic --no-dereference "$(pwd)"/"$element" ~/"$(dirname "$element")"
 		if [ "$verbose" ]; then
-			echo $element is now linked on ~
+			echo "$element" is now linked on ~
 		fi
 	done
 }
@@ -97,7 +97,8 @@ while [ $# -gt 0 ]; do
 			verbose=True
 			shift;;
 		add)
-			action="add '$@'"
+			echo Pending functionality
+			#action="add $@"
 			shift;;
 		unlink)
 			echo Pending functionality
@@ -114,7 +115,7 @@ while [ $# -gt 0 ]; do
 		test)
 			shift;;
 		link)
-			action="cd ~/dotfiles/linked && link_linked" 
+			action="cd ~/dotfiles/linked && link_linked"
 			shift;;
 		*)
 			if [ ! -d ~/dotfiles ]; then
@@ -125,4 +126,5 @@ while [ $# -gt 0 ]; do
 			shift;;
 	esac
 done
+
 eval $action
