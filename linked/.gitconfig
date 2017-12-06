@@ -3,10 +3,10 @@
 	editor = nvim
 [alias]
 	fix = commit --all --amend --no-edit
-        lg = log --graph --all --date=relative \
-        --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-        lgshort = !git lg \
-        --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	lg = log --graph --date=relative \
+        --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ad)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(
+reset) %C(dim white)- %an%C(reset)'
+        lga = !git lg --all
 	commiters = shortlog --summary --numbered --all --no-merges
 	recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
 	recap = !git log --all --oneline --no-merges --author=$(git config --get user.email)
