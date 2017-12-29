@@ -59,9 +59,6 @@ fi
 ###############################################################################
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [[ -f ~/.aliases.sh ]]; then
 	source ~/.aliases.sh
 fi
@@ -87,7 +84,9 @@ fi
 ###############################################################################
 # Autoenv Python virtualenv
 
-source ~/.autoenv/activate.sh
+if [ -e ~/.autoenv/activate.sh ]; then
+	source ~/.autoenv/activate.sh
+fi
 
 ###############################################################################
 # Dotfiles synchronization
