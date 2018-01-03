@@ -4,11 +4,19 @@ A minimal dotfiles system inspired by [cowboy dotfiles].
 
 Dotfiles should accommodate to your needs, these dotfiles are simple, yet handle relative complex config such as symlink directories.
 
-Written on POSIX shell, should work on almost anything unix-y.
+Written in POSIX shell, should work on almost anything unix-y.
 
 One liner
 ---------
-```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && sudo ./dotfiles.sh```
+```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && /bin/sh dotfiles.sh```
+
+Explanation
+-----------
+This one liner does the following.
+* Pulls this whole git repo (If there is no git installed fails).
+* Tries to install according to corresponding script in `install/`
+* Links all files on `linked/` to their corresponding locations
+    * This includes symbolic directories
 
 Quick guide
 -----------

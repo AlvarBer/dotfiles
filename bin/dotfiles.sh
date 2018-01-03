@@ -1,24 +1,5 @@
 #!/usr/bin/env sh
 
-# synch pull lastest changes and merges them
-synch() {
-	cd ~/dotfiles
-	git fetch origin master
-	if [ "$(git rev-parse master)" = "$(git rev-parse origin/master)" ]; then
-		echo No new changes in dotfiles upstream
-		exit 0
-	else
-		git merge origin/master  # Simple update
-		if git diff --name-status master origin/master | grep -E "^A|^C|^R|^T"; then
-			if [ "$verbose" ]; then  # Not so simple update
-				echo Relinking
-			fi
-			cd linked/
-			link_linked "$(find . -type f -or -type l -printf '%P\n')"  # Relinking
-		fi
-	fi
-}
-
 # clone is for the first time we run dotfiles
 clone() {
 	cd ~
@@ -37,6 +18,25 @@ clone() {
 	else
 		echo Already cloned!
 		exit 1
+	fi
+}
+
+# synch pull lastest changes and merges them
+synch() {
+	cd ~/dotfiles
+	git fetch origin master
+	if [ "$(git rev-parse master)" = "$(git rev-parse origin/master)" ]; then
+		echo No new changes in dotfiles upstream
+		exit 0
+	else
+		git merge origin/master  # Simple update
+		if git diff --name-status master origin/master | grep -E "^A|^C|^R|^T"; then
+			if [ "$verbose" ]; then  # Not so simple update
+				echo Relinking
+			fi
+			cd linked/
+			link_linked "$(find . -type f -or -type l -printf '%P\n')"  # Relinking
+		fi
 	fi
 }
 
@@ -83,6 +83,22 @@ add() {
 	echo Pending functionality
 }
 
+print_help() {
+	echo \
+"Dotfiles is a configuration management system
+Usage: dotfiles.sh [OPTION] [COMMAND]
+
+Commands
+clone                clones the repository and tries to install
+install              install programs
+sync                 pulls and merges
+link                 relinks folder with local repo
+
+Options
+-v, --verbose        get verbose output
+-h, --help           show this message
+"
+}
 
 # Script itself
 set -e
@@ -90,12 +106,11 @@ NAME=AlvarBer
 WEBSITE=github.com
 remoteurl=https://${NAME}@${WEBSITE}/${NAME}/dotfiles.git
 #sshurl=git@${WEBSITE}:${NAME}/dotfiles.git
+# Default action
+action=print_help
 
 while [ $# -gt 0 ]; do
 	case $1 in
-		-v | --verbose)
-			verbose=True
-			shift;;
 		add)
 			echo Pending functionality
 			#action="add $@"
@@ -115,20 +130,11 @@ while [ $# -gt 0 ]; do
 		link)
 			action="cd ~/dotfiles/linked && link_linked"
 			shift;;
+		-v | --verbose)
+			verbose=True
+			shift;;
 		-h | --help | *)
-			echo "Dotfiles is a configuration management system
-Usage: dotfiles.sh [OPTION] [COMMAND]
-
-Commands
-clone                clones the repository and tries to install
-install              install programs
-sync                 pulls and merges
-link                 relinks folder with local repo
-
-Options
--v, --verbose        get verbose output
--h, --help           show this message
-			"
+			action=print_help
 			shift;;
 	esac
 done
