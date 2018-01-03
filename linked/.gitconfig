@@ -13,3 +13,6 @@
 	changelog = log --oneline --no-merges
 [push]
 	default = simple
+[user]
+	name = Alvarber
+	email = alvaro.garcia95@hotmail.com

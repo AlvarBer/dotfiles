@@ -8,25 +8,26 @@ Written in POSIX shell, should work on almost anything unix-y.
 
 One liner
 ---------
-```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && /bin/sh dotfiles.sh```
+```wget https://raw.githubusercontent.com/AlvarBer/dotfiles/master/bin/dotfiles.sh && /bin/sh dotfiles.sh clone```
 
 Explanation
 -----------
 This one liner does the following.
 * Pulls this whole git repo (If there is no git installed fails).
-* Tries to install according to corresponding script in `install/`
-* Links all files on `linked/` to their corresponding locations
-    * This includes symbolic directories
+* Tries to install according to corresponding script in `install/`.
+* Replicates the entire file hierarchy from `linked/` on `~`.
+    - This includes symbolic directories.
+    - Preserves files inside directories that already exist. 
 
-Quick guide
------------
-Every folder does something different, following are the functions of each one, if you are installing for the first time
-you run the one liner and it should be done.
-After that you hav different options, but with a `dotfiles.sh` your dotfiles should synchronize with your remote repo.
+More info
+---------
+On `dotfiles.sh` every folder represents a different mechanism, following are
+the functions of each one, if you are installing for the first time you should
+be good with the one liner.
 
 backup folder
 -------------
-Folder which fills up when a synchronization happens and there is a clash.
+Folder which fills up when a synchronization happens and there is a clash between files.
 
 bin folder
 ----------
@@ -34,7 +35,7 @@ All files here are considered executables.
 
 `dotfiles.sh` is where the main synchronization happens.
 
-This whole folder should be sourced in your *bashrc*, *zshrc*, etc...
+This whole folder should be added to your path in the *bashrc*, *zshrc*, etc...
 
 install folder
 --------------
