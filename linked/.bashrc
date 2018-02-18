@@ -1,10 +1,5 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
-if [[ $- != *i* ]] ; then
-	# Shell is non-interactive.  Be done now!
+if [[ $- != *i* ]] ; then  # Shell is non-interactive.  Be done now!
 	return
 fi
 
@@ -30,10 +25,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Export some variables
-export JAVA_HOME=/usr/bin/java
-export EDITOR=vim
-
 ###############################################################################
 # Prompt & Colors
 
@@ -52,8 +43,8 @@ fi
 source ~/.bash_prompt
 
 # Byobu Prompt in case we are in byobu
-if [[ -r /home/mortadelegle/.byobu/prompt ]]; then
-	source /home/mortadelegle/.byobu/prompt
+if [[ -r ~/.byobu/prompt ]]; then
+	source ~/.byobu/prompt
 fi
 
 ###############################################################################
@@ -100,3 +91,6 @@ TMP=${TMP#:}
 PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
 
+# Avoid ssh password every time
+keychain $HOME/.ssh/id_rsa &>/dev/null
+source $HOME/.keychain/$HOSTNAME-sh

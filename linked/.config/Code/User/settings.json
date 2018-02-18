@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.tidal": "haskell"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Build": true,
+        "**/.vscode": true,
+        "**/**.import": true,
+        "**/**.png": true,
+    },
+    "workbench.colorTheme": "One Dark Pro Vivid",
+    "explorer.confirmDelete": false,
+}

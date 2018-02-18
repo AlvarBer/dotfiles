@@ -11,6 +11,10 @@
 	recap = !git log --all --oneline --no-merges --author=$(git config --get user.email)
 	today = !git recap --since=00:00:00
 	changelog = log --oneline --no-merges
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [push]
 	default = simple
 [user]
