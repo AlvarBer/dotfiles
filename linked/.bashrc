@@ -31,7 +31,7 @@ shopt -s checkwinsize
 # set a fancy prompt (non-color, unless we know we "want" color)
 if [[ $(tput colors) -gt 1 || $COLOUR == "yes" ]]; then
 	export COLOUR=yes # This doesn't cover all cases, but what does?
-	source ~/.colours.sh # Some Colours for convenience
+	. ~/.colours.sh # Some Colours for convenience
 
 	# Colored GCC warning and errors
 	export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -40,18 +40,13 @@ else
 	export COLOUR=no
 fi
 
-source ~/.bash_prompt
-
-# Byobu Prompt in case we are in byobu
-if [[ -r ~/.byobu/prompt ]]; then
-	source ~/.byobu/prompt
-fi
+. ~/.bash_prompt
 
 ###############################################################################
 
 # Alias definitions.
-if [[ -f ~/.aliases.sh ]]; then
-	source ~/.aliases.sh
+if [ -f ~/.aliases.sh ]; then
+	. ~/.aliases.sh
 fi
 
 ###############################################################################
@@ -61,14 +56,14 @@ fi
 # is already enabled in /etc/bash.bashrc and /etc/profile sources that file).
 if ! shopt -oq posix; then
 	if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-		source /usr/share/bash-completion/bash_completion
+		. /usr/share/bash-completion/bash_completion
 	elif [[ -f /etc/bash_completion ]]; then
-		source /etc/bash_completion
+		. /etc/bash_completion
 	fi
 fi
 
 # SSH auto-completion based on entries in known_hosts.
-if [[ -e ~/.ssh/known_hosts ]]; then
+if [ -e ~/.ssh/known_hosts ]; then
 	complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
 fi
 
@@ -76,13 +71,17 @@ fi
 # Autoenv Python virtualenv
 
 if [ -e ~/.autoenv/activate.sh ]; then
-	source ~/.autoenv/activate.sh
+	. ~/.autoenv/activate.sh
+	AUTOENV_ENABLE_LEAVE="TRUE"
+	AUTOENV_ENV_FILENAME=".env_entry.sh"
+	AUTOENV_ENV_LEAVE_FILENAME=".env_leave.sh"
+	AUTOENV_ASSUME_YES="TRUE"
 fi
 
 ###############################################################################
 # Dotfiles synchronization
 
-# Adds an entry to the PATH after trying to remove it, 
+# Adds an entry to the PATH after trying to remove it,
 # as seen on http://stackoverflow.com/a/2108540/142339
 TMP=:$PATH:
 TMP=${TMP/:~/dotfiles/bin:/:}
@@ -93,4 +92,4 @@ PATH=~/dotfiles/bin:$PATH
 
 # Avoid ssh password every time
 keychain $HOME/.ssh/id_rsa &>/dev/null
-source $HOME/.keychain/$HOSTNAME-sh
+. $HOME/.keychain/$HOSTNAME-sh
