@@ -1,7 +1,4 @@
 {
-    "files.associations": {
-        "*.tidal": "haskell"
-    },
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -13,6 +10,8 @@
         "**/**.import": true,
         "**/**.png": true,
     },
-    "workbench.colorTheme": "One Dark Pro Vivid",
+    //"workbench.colorTheme": "One Dark Pro Vivid",
     "explorer.confirmDelete": false,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
 }
