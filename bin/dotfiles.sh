@@ -11,10 +11,10 @@ clone() {
 		echo "Cloning dotfiles repo"
 		git clone "$remoteurl" dotfiles
 		#git remote set-url origin sshurl
-
-		installs
+		#installs
 		cd ~/dotfiles/linked
 		link_linked "$(find . -type f -or -type l -printf '%P\n')"
+		rm "$0"
 	else
 		echo "Already cloned!"
 		exit 1
