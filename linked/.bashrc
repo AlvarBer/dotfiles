@@ -95,6 +95,3 @@ if which keychain; then
 	keychain $HOME/.ssh/id_rsa &>/dev/null
 	. $HOME/.keychain/$HOSTNAME-sh
 fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
