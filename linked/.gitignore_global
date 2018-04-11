@@ -49,7 +49,7 @@
 .Trashes
 
 # Windows image file caches
-Thumbs.db 
+Thumbs.db
 
 # Folder config file
 Desktop.ini
@@ -63,4 +63,12 @@ Desktop.ini
 .*.swp
 .*.swo
 
+# Visual Studio Code stuff
 .vscode
+
+# Environment variables file
+.envrc
+.env*
+
+# Mypy cache
+.mypy_cache

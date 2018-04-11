@@ -20,9 +20,8 @@
         "**/.git": true,
         "**/.hg": true,
         "**/*.ipynb": true,
-        "**/**.import": true,
         "**/.mypy_cache": true,
-        "**/**.png": true,
+        "**/*.png": true,
         "**/*.pyc": true,
         "**/__pycache__": true,
         "**/.svn": true,
@@ -30,6 +29,7 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
@@ -38,4 +38,14 @@
     "window.zoomLevel": 1,
     "workbench.colorTheme": "One Dark Pro Vivid",
     "workbench.statusBar.feedback.visible": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
 }
