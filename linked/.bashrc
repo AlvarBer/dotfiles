@@ -67,16 +67,7 @@ if [ -e ~/.ssh/known_hosts ]; then
 	complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
 fi
 
-###############################################################################
-# Autoenv Python virtualenv
-
-if [ -e ~/.autoenv/activate.sh ]; then
-	. ~/.autoenv/activate.sh
-	AUTOENV_ENABLE_LEAVE="TRUE"
-	AUTOENV_ENV_FILENAME=".env_entry.sh"
-	AUTOENV_ENV_LEAVE_FILENAME=".env_leave.sh"
-	AUTOENV_ASSUME_YES="TRUE"
-fi
+eval "$(direnv hook bash)"
 
 ###############################################################################
 # Dotfiles synchronization
@@ -91,7 +82,7 @@ PATH=$TMP
 PATH=~/dotfiles/bin:$PATH
 
 # Avoid ssh password every time
-if which keychain; then
+if which keychain > /dev/null; then
 	keychain $HOME/.ssh/id_rsa &>/dev/null
 	. $HOME/.keychain/$HOSTNAME-sh
 fi

@@ -35,7 +35,7 @@
     "python.linting.pylintEnabled": true,
     "python.unitTest.pyTestEnabled": true,
     "telemetry.enableTelemetry": false,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "workbench.colorTheme": "One Dark Pro Vivid",
     "workbench.statusBar.feedback.visible": false,
     "gitlens.advanced.messages": {
